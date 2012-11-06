@@ -1,0 +1,74 @@
+﻿@using TheStation.Models
+@model Services
+
+@{
+    ViewBag.Title = "Services from The Station Hair Studio: Best of Denver Colorado curly hair salon";
+}
+
+<div class="heading-stripe transparent">
+	<h1>Services</h1>
+</div>
+
+<div class="content services">
+	<ul class="horizontalNav">
+    @{
+        int counter = 1;
+        int serviceCount = Model.GetServices().Count;
+
+        foreach (var serviceType in Model.GetServices())
+        {
+            string className = "";
+
+            if (counter == 1)
+            {
+                className = "active";
+            }
+            
+            <li>
+               <a class="@className" data-service="@serviceType.Key.Replace(" ", string.Empty)" href="javascript:void(0)">@serviceType.Key</a>
+        
+                @if (counter < serviceCount)
+                {
+                    <text> | </text>
+                }
+            </li>
+        
+            counter++;
+        }
+    }
+    </ul>
+
+    <h2>Services</h2>
+    @{
+        int count = 0;
+
+        foreach (var serviceType in Model.GetServices())
+        {
+            string className = "";
+
+            if (count != 0)
+            {
+                className = "hide";
+            }
+            <div class="clearfix @className" data-service="@serviceType.Key.Replace(" ", string.Empty)">
+                <ul>
+                @foreach (var service in serviceType.Value)
+                {
+                    <li>
+                        <span class="service-name">@service.Name</span>
+                        <span class="service-price">@service.Price</span>
+
+                        @if (null != service.Notes)
+                        {
+	                        <br />
+	                        <span class="service-notes">@service.Notes</span>
+                        }
+                    </li>
+                }
+                </ul>
+            </div>
+        
+            count++; 
+        }
+    }
+</div>

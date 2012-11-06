@@ -1,0 +1,53 @@
+﻿@using TheStation.Models
+@model List<Employee>
+		   
+@{
+    ViewBag.Title = "Stylists at The Station Hair Studio: Best of Denver Colorado curly hair salon";
+}
+
+<div class="heading-stripe transparent">
+	<h1>Stylists</h1>
+</div>
+
+<div class="content">
+	<div class="stylist-navigation">
+		<ul>
+		@foreach (Employee staff in Model)
+		{
+			<li data-stylist="@staff.ID">
+				<a href="javascript:void(0)" title="@staff.Profession.ToString()">@staff.Name</a>
+			</li>
+		}
+		</ul>
+	</div>
+
+	<div class="bios">
+		<ul>
+		@foreach (Employee staff in Model)
+		{
+			<li data-bio="@staff.ID">
+				<h3>@staff.Name</h3>
+				<p>@staff.Profession.ToString()</p>
+                <div class="picFrame">
+                    <img class="frame" alt="The Station Hair Studio: @staff.Name" src="@Url.Content("~/Content/images/stylists/" + @staff.ImgName)" />
+                </div>
+		
+				@foreach (string bio in staff.Bio)
+				{
+					<p>@bio</p>
+				}
+
+                @if (null != staff.Link)
+                {
+                    <p>
+                        <a href="@staff.Link" target="_blank">@staff.LinkLabel</a>
+                    </p>
+                }
+			</li>
+		}
+		</ul>
+	</div>
+    <div class="gallery">
+        @Html.Partial("_ImageGallery")
+    </div>
+</div>

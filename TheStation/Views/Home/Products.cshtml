@@ -1,0 +1,56 @@
+﻿@using TheStation.Models
+@model List<Product>
+
+@{
+    ViewBag.Title = "Products in use at The Station Hair Studio: Best of Denver Colorado curly hair salon";
+}
+
+<div class="heading-stripe transparent">
+	<h1>Products</h1>
+</div>
+
+<div class="content">
+    <div class="product colorLine">
+        <h3>Hair Care:</h3>
+        <ul>
+            @foreach (var product in Model)
+            {
+                if (product.ProductType == ProductTypes.HairCare)
+                {
+                    <li>
+                        <span><a href="@product.CompanyUrl" target="_blank" alt="@product.Name">@product.Name</a></span>
+                    </li>
+                }
+            }
+        </ul>
+
+    <div class="product colorLine">
+        <h3>Skincare:</h3>
+        <ul>
+            @foreach (var product in Model)
+            {
+                if (product.ProductType == ProductTypes.SkinCare)
+                {
+                    <li>
+                        <span><a href="@product.CompanyUrl" target="_blank" alt="@product.Name">@product.Name</a></span>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+
+    <div class="product colorLine">
+        <h3>Color Line:</h3>
+        <ul>
+            @foreach (var product in Model)
+            {
+                if (product.ProductType == ProductTypes.ColorLine)
+                {
+                    <li>
+                       <span><a href="@product.CompanyUrl" target="_blank" alt="@product.Name">@product.Name</a></span>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
